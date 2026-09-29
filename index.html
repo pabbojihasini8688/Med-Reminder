@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedRemind - Simple Medicine Reminder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">💊 MedRemind</div>
+        <nav>
+            <a href="#about" id="nav-about">About</a>
+            <a href="#features" id="nav-features">Features</a>
+            <a href="#" id="nav-login-btn" onclick="showAuthPage()">Login / Sign Up</a>
+            <a href="#" id="nav-logout-btn" onclick="logout()" style="display: none;">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+
+        <!-- Landing Sections (About & Features) -->
+        <div id="landing-page">
+            <section id="about" class="card">
+                <h2>About MedRemind</h2>
+                <p>Welcome to <strong>MedRemind</strong>, a clean and lightweight web tool designed to help you stay on top of your health. Missing medications can disrupt your recovery; our goal is to eliminate that issue entirely through simple local scheduling. No complicated setups, no data selling, just your personal health schedule preserved right in your browser.</p>
+            </section>
+
+            <section id="features" class="card">
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>🔐 Local Accounts:</strong> Securely sign up and manage your logs directly on your browser.</li>
+                    <li><strong>📋 Real-Time Dashboard:</strong> Instantly view your catalog of entered medicines.</li>
+                    <li><strong>⏰ Dynamic Tracking:</strong> Seamlessly add medicine names, custom dosages, and times.</li>
+                    <li><strong>🚫 Zero Backend Hassle:</strong> Run everything smoothly without needing Node.js, Java, or SQL.</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Authentication Page (Login / Sign Up) -->
+        <section id="auth-page" class="card" style="display: none;">
+            <h2 id="auth-title">Login to Your Account</h2>
+            
+            <!-- Message banner for error/success notifications -->
+            <div id="auth-msg-banner" class="msg-banner" style="display: none;"></div>
+
+            <form id="auth-form" onsubmit="handleAuth(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn" id="auth-submit-btn">Login</button>
+            </form>
+            <p id="auth-toggle-text">Don't have an account? <a href="#" onclick="toggleAuthMode(true)">Sign Up here</a></p>
+        </section>
+
+        <!-- Dashboard (Protected View - Visible only after log in) -->
+        <section id="dashboard-page" class="card" style="display: none;">
+            <h2>Welcome back, <span id="user-display-name">User</span>!</h2>
+            
+            <!-- Add Medicine Form -->
+            <div class="med-management">
+                <h3>➕ Add New Medicine</h3>
+                <form id="medicine-form" onsubmit="addMedicine(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="med-name">Medicine Name</label>
+                            <input type="text" id="med-name" required placeholder="e.g., Paracetamol">
+                        </div>
+                        <div class="form-group">
+                            <label for="med-dosage">Dosage</label>
+                            <input type="text" id="med-dosage" required placeholder="e.g., 500mg or 1 pill">
+                        </div>
+                        <div class="form-group">
+                            <label for="med-time">Reminder Time</label>
+                            <input type="time" id="med-time" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn success-btn">Save Medication</button>
+                </form>
+            </div>
+
+            <!-- List of Medicines -->
+            <div class="med-list-container">
+                <h3>📋 Your Medication Schedule</h3>
+                <div id="no-meds-msg" class="empty-msg">No medicines added yet. Your schedule is clear!</div>
+                <ul id="medicine-list">
+                    <!-- Javascript inserts elements here -->
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
